@@ -1,1 +1,1 @@
-export { todoType } from './todo/todo';
+export { createdTodoType, todoType } from './todo/todo';

@@ -1,10 +1,25 @@
+import PropTypes from 'prop-types';
 import { getValidClasses } from '../../../../helpers/helpers';
 import { AppPath, TodoStatus } from '../../../../common/enums/enums';
 import { todoType } from '../../../../common/prop-types/prop-types';
 import './style.css';
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, onStatusChange, onTodoEdit, onTodoDelete }) => {
   const isDone = todo.status === TodoStatus.DONE;
+
+  const handleStatusChange = () => {
+    const status = isDone ? TodoStatus.OPEN : TodoStatus.DONE;
+
+    onStatusChange(todo, status);
+  };
+
+  const handleTodoEdit = () => {
+    onTodoEdit(todo);
+  };
+
+  const handleTodoDelete = () => {
+    onTodoDelete(todo);
+  };
 
   return (
     <li className={getValidClasses('todo', isDone && 'todo--done')}>
@@ -18,17 +33,26 @@ const Todo = ({ todo }) => {
           <span className="todo__nav">...</span>
           <ul className="todo__nav-list">
             <li className="todo__nav-item">
-              <button className="todo__button todo__button--done" type="button">
+              <button
+                onClick={handleStatusChange}
+                className="todo__button todo__button--done"
+                type="button"
+              >
                 done
               </button>
             </li>
             <li className="todo__nav-item">
-              <button className="todo__button todo__button--edit" type="button">
+              <button
+                onClick={handleTodoEdit}
+                className="todo__button todo__button--edit"
+                type="button"
+              >
                 edit
               </button>
             </li>
             <li className="todo__nav-item">
               <button
+                onClick={handleTodoDelete}
                 className="todo__button todo__button--delete"
                 type="button"
               >
@@ -44,6 +68,9 @@ const Todo = ({ todo }) => {
 
 Todo.propTypes = {
   todo: todoType.isRequired,
+  onStatusChange: PropTypes.func.isRequired,
+  onTodoEdit: PropTypes.func.isRequired,
+  onTodoDelete: PropTypes.func.isRequired,
 };
 
 export default Todo;
