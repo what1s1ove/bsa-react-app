@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
+import { useRouter } from 'hooks/hooks';
 import { getTodoById } from 'helpers/helpers';
 import { DataPlaceholder } from 'common/enums/enums';
 import { todoType } from 'common/prop-types/prop-types';
 import { Placeholder } from 'components/common/common';
 import './styles.css';
 
-const TodoPreview = ({ todos, id }) => {
-  const todo = getTodoById(todos, id);
+const TodoPreview = ({ todos }) => {
+  const { query } = useRouter();
+
+  const todo = getTodoById(todos, query.id);
 
   const hasPage = Boolean(todo);
 
@@ -37,7 +40,6 @@ const TodoPreview = ({ todos, id }) => {
 
 TodoPreview.propTypes = {
   todos: PropTypes.arrayOf(todoType.isRequired).isRequired,
-  id: PropTypes.string.isRequired,
 };
 
 export default TodoPreview;
