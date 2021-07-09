@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="doto-list" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="page-header__wrapper">
+        <h1 class="page-header__title">
+          <a href="./index.html">TODOList</a>
+        </h1>
+      </div>
+    </header>
+    <main>
+      <section class="todo-filter">
+        <h2 class="sr-only">TODOList filter</h2>
+        <form class="filter" autocomplete="off">
+          <label class="filter__search">
+            <span class="sr-only">Search by name</span>
+            <input name="search" type="search" placeholder="search by title" value="" />
+          </label>
+          <label class="filter__status">
+            <span class="sr-only">Search by status</span>
+            <select name="status">
+              <option value="all">all</option>
+              <option value="open">open</option>
+              <option value="done">done</option>
+            </select>
+          </label>
+          <label class="filter__priority">
+            <span class="sr-only">Search by priority</span>
+            <select name="priority">
+              <option value="all">all</option>
+              <option value="high">high</option>
+              <option value="normal">normal</option>
+              <option value="low">low</option>
+            </select>
+          </label>
+          <button class="filter__create" type="button">Created</button>
+        </form>
+      </section>
+      <section class="todos">
+        <h2 class="sr-only">Your TODOList</h2>
+        <ul class="todolist">
+          <li class="todo todo--done">
+            <h3 class="todo__title">
+              <a href="./todo.html">Learn HTML</a>
+            </h3>
+            <p class="todo__description">Be the best with HTML 🟥</p>
+            <footer class="todo__footer">
+              <strong class="todo__status">high</strong>
+              <div class="todo__nav-wrapper" tabindex="0" role="button">
+                <span class="todo__nav">...</span>
+                <ul class="todo__nav-list">
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--done" type="button">done</button>
+                  </li>
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--edit" type="button">edit</button>
+                  </li>
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--delete" type="button">delete</button>
+                  </li>
+                </ul>
+              </div>
+            </footer>
+          </li>
+          <li class="todo">
+            <h3 class="todo__title">
+              <a href="./todo.html">Learn CSS</a>
+            </h3>
+            <p class="todo__description">Be the best with CSS 🟦</p>
+            <footer class="todo__footer">
+              <strong class="todo__status">normal</strong>
+              <div class="todo__nav-wrapper" tabindex="0" role="button">
+                <span class="todo__nav">...</span>
+                <ul class="todo__nav-list">
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--done" type="button">done</button>
+                  </li>
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--edit" type="button">edit</button>
+                  </li>
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--delete" type="button">delete</button>
+                  </li>
+                </ul>
+              </div>
+            </footer>
+          </li>
+          <li class="todo">
+            <h3 class="todo__title">
+              <a href="./todo.html">Learn JS</a>
+            </h3>
+            <p class="todo__description">Be the best with JS 🟨</p>
+            <footer class="todo__footer">
+              <strong class="todo__status">high</strong>
+              <div class="todo__nav-wrapper" tabindex="0" role="button">
+                <span class="todo__nav">...</span>
+                <ul class="todo__nav-list">
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--done" type="button">done</button>
+                  </li>
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--edit" type="button">edit</button>
+                  </li>
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--delete" type="button">delete</button>
+                  </li>
+                </ul>
+              </div>
+            </footer>
+          </li>
+          <li class="todo">
+            <h3 class="todo__title">
+              <a href="todo.html">Learn Deno</a>
+            </h3>
+            <p class="todo__description">Be the best with Deno 🦕</p>
+            <footer class="todo__footer">
+              <strong class="todo__status">low</strong>
+              <div class="todo__nav-wrapper" tabindex="0" role="button">
+                <span class="todo__nav">...</span>
+                <ul class="todo__nav-list">
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--done" type="button">done</button>
+                  </li>
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--edit" type="button">edit</button>
+                  </li>
+                  <li class="todo__nav-item">
+                    <button class="todo__button todo__button--delete" type="button">delete</button>
+                  </li>
+                </ul>
+              </div>
+            </footer>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="page-footer">
+      <blockquote class="page-footer__quote-wrapper">
+        <q class="page-footer__quote">If you want to make your dreams come true, the first thing you have to do is wake up.</q>
+      </blockquote>
+    </footer>
+    <div hidden>
+      <div class="modal">
+        <section class="todo-popup">
+          <h2 class="sr-only">Create new ToDo</h2>
+          <form class="todo-popup__form" autocomplete="off">
+            <label class="todo-popup__title">
+              <span class="todo-popup__heading">Title:</span>
+              <input name="title" type="text" placeholder="Title" required="" value="" />
+            </label>
+            <label class="todo-popup__description">
+              <span class="todo-popup__heading">Description</span>
+              <textarea name="description" placeholder="Description"></textarea>
+            </label>
+            <label class="todo-popup__priority">
+              <span class="todo-popup__heading">Priority</span>
+              <select name="priority">
+                <option value="high">high</option>
+                <option value="normal">normal</option>
+                <option value="low">low</option>
+              </select>
+            </label>
+            <p class="todo-popup__buttons">
+              <button class="todo-popup__button" type="button">Cancel</button>
+              <button class="todo-popup__button" type="submit">Save</button>
+            </p>
+          </form>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
