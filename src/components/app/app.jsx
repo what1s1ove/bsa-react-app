@@ -4,8 +4,9 @@ import { Header, Footer } from '../common/common';
 import Todos from '../todos/todos';
 import TodoPreview from '../todo-preview/todo-preview';
 import NotFound from '../not-found/not-found';
+import database from '../../database.json';
 
-const TODOS_COUNT = 5;
+const { todos } = database;
 
 const App = () => {
   const { pathname } = window.location;
@@ -15,10 +16,10 @@ const App = () => {
 
     switch (path) {
       case AppPath.ROOT: {
-        return <Todos count={TODOS_COUNT} />;
+        return <Todos todos={todos} />;
       }
       case `${AppPath.TODOS}/${id}`: {
-        return <TodoPreview />;
+        return <TodoPreview todos={todos} id={id} />;
       }
       default: {
         return <NotFound />;

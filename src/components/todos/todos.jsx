@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
+import { DataPlaceholder } from '../../common/enums/enums';
+import { todoType } from '../../common/prop-types/prop-types';
+import { Placeholder } from '../common/common';
 import { TodoFilter, TodoList, TodoPopup } from './components/components';
 import './styles.css';
 
-const Todos = ({ count }) => {
+const Todos = ({ todos }) => {
   const isPopupOpen = false;
+  const hasTasks = Boolean(todos.length);
 
   return (
     <>
@@ -13,7 +17,11 @@ const Todos = ({ count }) => {
       </section>
       <section className="todos">
         <h2 className="sr-only">Your TODOList</h2>
-        <TodoList count={count} />
+        {hasTasks ? (
+          <TodoList todos={todos} />
+        ) : (
+          <Placeholder text={DataPlaceholder.NO_TODOS} />
+        )}
       </section>
       {isPopupOpen && <TodoPopup />}
     </>
@@ -21,7 +29,7 @@ const Todos = ({ count }) => {
 };
 
 Todos.propTypes = {
-  count: PropTypes.number.isRequired,
+  todos: PropTypes.arrayOf(todoType.isRequired).isRequired,
 };
 
 export default Todos;

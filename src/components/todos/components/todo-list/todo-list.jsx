@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
+import { todoType } from '../../../../common/prop-types/prop-types';
 import Todo from '../todo/todo';
 import './style.css';
 
-const Todolist = ({ count }) => (
+const Todolist = ({ todos }) => (
   <ul className="todolist">
-    {Array.from(new Array(count), (_, idx) => (
-      <Todo key={idx} />
+    {todos.map((todo) => (
+      <Todo todo={todo} key={todo.id} />
     ))}
   </ul>
 );
 
 Todolist.propTypes = {
-  count: PropTypes.number.isRequired,
+  todos: PropTypes.arrayOf(todoType.isRequired).isRequired,
 };
 
 export default Todolist;

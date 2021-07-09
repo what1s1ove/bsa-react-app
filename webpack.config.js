@@ -10,12 +10,13 @@ module.exports = {
     filename: 'main.js',
   },
   devServer: {
+    contentBase: path.join(__dirname, '/src'),
     historyApiFallback: true,
   },
   module: {
     rules: [
       {
-        test: /\.js|jsx$/,
+        test: /\.js$|jsx$/,
         exclude: /node_modules/,
         resolve: {
           extensions: ['.js', '.jsx'],
