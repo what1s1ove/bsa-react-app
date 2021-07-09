@@ -1,0 +1,27 @@
+.todo-preview {
+  width: 100%;
+  max-width: 1170px;
+  margin: 30px auto 0;
+  padding: 0 120px;
+}
+
+.todo-preview__title {
+  text-align: center;
+  font-size: 30px;
+}
+
+.todo-preview__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+}
+
+.todo-preview__item-title {
+  margin: 0 0 5px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.todo-preview__item-desc {
+  text-transform: capitalize;
+}

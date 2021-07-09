@@ -1,5 +1,11 @@
+import { StrictMode } from 'react';
 import { render } from 'react-dom';
-import { Header } from './components/common/common';
+import App from './components/app/app';
 import './assets/styles/styles.css';
 
-render(<Header />, document.getElementById('root'));
+render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+  document.getElementById('root'),
+);

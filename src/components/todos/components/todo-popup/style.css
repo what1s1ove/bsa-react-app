@@ -1,0 +1,144 @@
+.todo-popup {
+  width: 250px;
+  padding: 30px 15px 15px;
+
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-primary);
+}
+
+.todo-popup__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-popup__heading {
+  display: block;
+
+  text-indent: 5px;
+}
+
+.todo-popup__title {
+  font-size: 16px;
+}
+
+.todo-popup__title input {
+  display: block;
+
+  width: 100%;
+  margin-top: 5px;
+  padding: 5px;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 0;
+
+  appearance: none;
+}
+
+.todo-popup__title input::placeholder {
+  color: var(--color-primary);
+}
+
+.todo-popup__description {
+  margin-top: 5px;
+
+  font-size: 16px;
+}
+
+.todo-popup__description textarea {
+  display: block;
+
+  width: 100%;
+  height: 75px;
+  margin: 5px 0 0;
+  padding: 5px;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 0;
+
+  overflow-y: auto;
+
+  appearance: none;
+  resize: none;
+}
+
+.todo-popup__description textarea::placeholder {
+  color: var(--color-primary);
+}
+
+.todo-popup__priority {
+  position: relative;
+
+  margin-top: 5px;
+
+  font-size: 16px;
+}
+
+.todo-popup__priority:before {
+  z-index: 1;
+
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+
+  content: '';
+  width: 20px;
+  height: 20px;
+
+  border: 1px solid var(--color-primary);
+
+  pointer-events: none;
+}
+
+.todo-popup__priority:after {
+  z-index: 1;
+
+  position: absolute;
+  bottom: 3px;
+  right: 8px;
+
+  content: '';
+
+  border: 7px solid transparent;
+  border-top: 8px solid var(--color-primary);
+
+  pointer-events: none;
+}
+
+.todo-popup__priority select {
+  display: block;
+
+  width: 100%;
+  margin-top: 5px;
+  padding: 5px;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 0;
+
+  appearance: none;
+  cursor: pointer;
+}
+
+.todo-popup__buttons {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 15px 0 0;
+}
+
+.todo-popup__button {
+  width: 100px;
+  padding: 5px 0;
+
+  font-size: 16px;
+
+  background-color: transparent;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.todo-popup__button:hover {
+  background-color: #b1b1b1;
+}
