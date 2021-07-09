@@ -15,6 +15,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js|jsx$/,
+        exclude: /node_modules/,
+        resolve: {
+          extensions: ['.js', '.jsx'],
+        },
+        loader: 'babel-loader',
+      },
+      {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
