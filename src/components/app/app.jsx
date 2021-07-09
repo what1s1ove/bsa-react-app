@@ -5,6 +5,8 @@ import Todos from '../todos/todos';
 import TodoPreview from '../todo-preview/todo-preview';
 import NotFound from '../not-found/not-found';
 
+const TODOS_COUNT = 5;
+
 const App = () => {
   const { pathname } = window.location;
 
@@ -13,7 +15,7 @@ const App = () => {
 
     switch (path) {
       case AppPath.ROOT: {
-        return <Todos />;
+        return <Todos count={TODOS_COUNT} />;
       }
       case `${AppPath.TODOS}/${id}`: {
         return <TodoPreview />;

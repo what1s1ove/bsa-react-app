@@ -1,7 +1,7 @@
 import { TodoFilter, TodoList, TodoPopup } from './components/components';
 import './styles.css';
 
-const Todos = () => {
+const Todos = ({ count }) => {
   const isPopupOpen = false;
 
   return (
@@ -12,7 +12,7 @@ const Todos = () => {
       </section>
       <section className="todos">
         <h2 className="sr-only">Your TODOList</h2>
-        <TodoList />
+        <TodoList count={count} />
       </section>
       {isPopupOpen && <TodoPopup />}
     </>

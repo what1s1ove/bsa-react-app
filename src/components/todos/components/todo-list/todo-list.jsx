@@ -1,9 +1,11 @@
 import Todo from '../todo/todo';
 import './style.css';
 
-const Todolist = () => (
+const Todolist = ({ count }) => (
   <ul className="todolist">
-    <Todo />
+    {Array.from(new Array(count), (_, idx) => (
+      <Todo key={idx} />
+    ))}
   </ul>
 );
 
