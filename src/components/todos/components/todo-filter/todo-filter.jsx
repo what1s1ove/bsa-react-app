@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types';
-import { DEFAULT_FILTER_VALUE } from '../../../../common/constants/constants';
-import {
-  FilterKey,
-  TodoPriority,
-  TodoStatus,
-} from '../../../../common/enums/enums';
+import { DEFAULT_FILTER_VALUE } from 'common/constants/constants';
+import { FilterKey, TodoPriority, TodoStatus } from 'common/enums/enums';
 import './style.css';
 
 const statusOptions = [DEFAULT_FILTER_VALUE].concat(Object.values(TodoStatus));

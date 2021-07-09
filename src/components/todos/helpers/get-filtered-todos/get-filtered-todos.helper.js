@@ -1,4 +1,4 @@
-import { DEFAULT_FILTER_VALUE } from '../../../../common/constants/constants';
+import { DEFAULT_FILTER_VALUE } from 'common/constants/constants';
 
 const getFilteredTodos = (todos, filterValues) => {
   const { search, status, priority } = filterValues;

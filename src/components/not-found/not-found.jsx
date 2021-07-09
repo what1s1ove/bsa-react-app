@@ -1,5 +1,5 @@
-import { DataPlaceholder } from '../../common/enums/enums';
-import { Placeholder } from '../common/common';
+import { DataPlaceholder } from 'common/enums/enums';
+import { Placeholder } from 'components/common/common';
 import './style.css';
 
 const NotFound = () => (

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { TodoKey, TodoStatus, TodoPriority } from '../../enums/enums';
+import { TodoKey, TodoStatus, TodoPriority } from 'common/enums/enums';
 
 const todoType = PropTypes.exact({
   [TodoKey.ID]: PropTypes.string.isRequired,

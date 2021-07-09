@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import { getValidClasses } from '../../../../helpers/helpers';
-import { AppPath, TodoStatus } from '../../../../common/enums/enums';
-import { todoType } from '../../../../common/prop-types/prop-types';
+import { getValidClasses } from 'helpers/helpers';
+import { AppPath, TodoStatus } from 'common/enums/enums';
+import { todoType } from 'common/prop-types/prop-types';
 import './style.css';
 
 const Todo = ({ todo, onStatusChange, onTodoEdit, onTodoDelete }) => {
@@ -24,7 +24,7 @@ const Todo = ({ todo, onStatusChange, onTodoEdit, onTodoDelete }) => {
   return (
     <li className={getValidClasses('todo', isDone && 'todo--done')}>
       <h3 className="todo__title">
-        <a href={`${AppPath.TODOS}/1`}>{todo.title}</a>
+        <a href={`${AppPath.TODOS}/${todo.id}`}>{todo.title}</a>
       </h3>
       <p className="todo__description">{todo.description}</p>
       <footer className="todo__footer">

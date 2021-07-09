@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { useCallback, useState } from '../../hooks/hooks';
-import { DataPlaceholder } from '../../common/enums/enums';
-import { Placeholder } from '../../components/common/common';
-import { todoType } from '../../common/prop-types/prop-types';
+import { useCallback, useState } from 'hooks/hooks';
+import { DataPlaceholder } from 'common/enums/enums';
+import { Placeholder } from 'components/common/common';
+import { todoType } from 'common/prop-types/prop-types';
 import { TodoFilter, TodoList, TodoPopup } from './components/components';
 import {
   addTodo,

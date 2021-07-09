@@ -1,10 +1,10 @@
-  import { DEFAULT_FILTER_VALUE } from '../../../common/constants/constants';
+  import { DEFAULT_FILTER_VALUE } from 'common/constants/constants';
   import {
     FilterKey,
     TodoKey,
     TodoPriority,
     TodoStatus,
-  } from '../../../common/enums/enums';
+  } from 'common/enums/enums';
 
   const DEFAULT_FILTER_VALUES = {
     [FilterKey.SEARCH]: '',

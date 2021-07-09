@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { useState, useFocusTrap } from '../../../../hooks/hooks';
-import { TodoKey, TodoPriority } from '../../../../common/enums/enums';
-import { todoType, createdTodoType } from '../../../../common/prop-types/prop-types';
-import { Modal } from '../../../common/common';
+import { useState, useFocusTrap } from 'hooks/hooks';
+import { TodoKey, TodoPriority } from 'common/enums/enums';
+import { todoType, createdTodoType } from 'common/prop-types/prop-types';
+import { Modal } from 'components/common/common';
 import './style.css';
 
 const priorityOptions = Object.values(TodoPriority);

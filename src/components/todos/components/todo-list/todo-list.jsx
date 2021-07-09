@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { todoType } from '../../../../common/prop-types/prop-types';
+import { todoType } from 'common/prop-types/prop-types';
 import Todo from '../todo/todo';
 import './style.css';
 

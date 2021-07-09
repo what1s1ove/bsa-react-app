@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { getTodoById } from '../../helpers/helpers';
-import { DataPlaceholder } from '../../common/enums/enums';
-import { todoType } from '../../common/prop-types/prop-types';
-import { Placeholder } from '../common/common';
+import { getTodoById } from 'helpers/helpers';
+import { DataPlaceholder } from 'common/enums/enums';
+import { todoType } from 'common/prop-types/prop-types';
+import { Placeholder } from 'components/common/common';
 import './styles.css';
 
 const TodoPreview = ({ todos, id }) => {

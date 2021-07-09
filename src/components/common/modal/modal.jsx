@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useCallback, useEffect } from '../../../hooks/hooks';
-import { KeydownKey } from '../../../common/enums/enums';
+import { useCallback, useEffect } from 'hooks/hooks';
+import { KeydownKey } from 'common/enums/enums';
 import './style.css';
 
 const Modal = ({ children, isOpen, onClose }) => {

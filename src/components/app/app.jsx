@@ -1,10 +1,10 @@
-import { getLastPath } from '../../helpers/helpers';
-import { AppPath } from '../../common/enums/enums';
-import { Header, Footer } from '../common/common';
-import Todos from '../todos/todos';
-import TodoPreview from '../todo-preview/todo-preview';
-import NotFound from '../not-found/not-found';
-import database from '../../database.json';
+import { getLastPath } from 'helpers/helpers';
+import { AppPath } from 'common/enums/enums';
+import { Header, Footer } from 'components/common/common';
+import Todos from 'components/todos/todos';
+import TodoPreview from 'components/todo-preview/todo-preview';
+import NotFound from 'components/not-found/not-found';
+import database from 'database.json';
 
 const { todos } = database;
 
