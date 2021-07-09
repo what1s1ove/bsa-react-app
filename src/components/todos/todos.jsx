@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { TodoFilter, TodoList, TodoPopup } from './components/components';
 import './styles.css';
 
@@ -17,6 +18,10 @@ const Todos = ({ count }) => {
       {isPopupOpen && <TodoPopup />}
     </>
   );
+};
+
+Todos.propTypes = {
+  count: PropTypes.number.isRequired,
 };
 
 export default Todos;

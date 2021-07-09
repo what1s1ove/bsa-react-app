@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Todo from '../todo/todo';
 import './style.css';
 
@@ -8,5 +9,9 @@ const Todolist = ({ count }) => (
     ))}
   </ul>
 );
+
+Todolist.propTypes = {
+  count: PropTypes.number.isRequired,
+};
 
 export default Todolist;
