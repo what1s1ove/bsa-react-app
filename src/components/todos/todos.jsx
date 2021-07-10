@@ -1,24 +1,26 @@
-import PropTypes from 'prop-types';
-import { useCallback, useState } from 'hooks/hooks';
+import {
+  useCallback,
+  useState,
+  useEffect,
+  useSelector,
+  useDispatch,
+} from 'hooks/hooks';
+import { todos as todosActionCreator } from 'store/actions';
 import { DataPlaceholder } from 'common/enums/enums';
 import { Placeholder } from 'components/common/common';
-import { todoType } from 'common/prop-types/prop-types';
 import { TodoFilter, TodoList, TodoPopup } from './components/components';
-import {
-  addTodo,
-  getFilteredTodos,
-  removeTodo,
-  updateTodo,
-  updateTodoStatus,
-} from './helpers/helpers';
+import { getFilteredTodos } from './helpers/helpers';
 import { DEFAULT_FILTER_VALUES, EMPTY_TODO } from './common/constants';
 import './styles.css';
 
-const Todos = ({ todos: fetchedTodos }) => {
-  const [todos, setTodos] = useState(fetchedTodos);
+const Todos = () => {
+  const { todos } = useSelector(({ todos }) => ({
+    todos: todos.todos,
+  }));
   const [currentTodo, setCurrentTodo] = useState(null);
   const [filterValues, setFilterValues] = useState(DEFAULT_FILTER_VALUES);
 
+  const dispatch = useDispatch();
   const filteredTodos = getFilteredTodos(todos, filterValues);
   const hasTasks = Boolean(filteredTodos.length);
   const hasCurrentTodo = Boolean(currentTodo);
@@ -34,18 +36,25 @@ const Todos = ({ todos: fetchedTodos }) => {
   const handleTodoSave = useCallback((todo) => {
     const isUpdate = Boolean(todo.id);
 
-    setTodos(isUpdate ? updateTodo(todos, todo) : addTodo(todos, todo));
+    dispatch(isUpdate ? todosActionCreator.updateTodo(todo) : todosActionCreator.addTodo(todo));
 
-    setCurrentTodo(null);
-  }, [setTodos, todos]);
+    setCurrentTodo(null)
+  }, [dispatch]);
 
   const handlerTodoStatusChange = useCallback((todo, status) => {
-    setTodos(updateTodoStatus(todos, todo.id, status));
-  }, [setTodos, todos]);
+    dispatch(todosActionCreator.changeStatus({
+      id: todo.id,
+      status
+    }));
+  }, [dispatch]);
 
   const handleTodoDelete = useCallback((todo) => {
-    setTodos(removeTodo(todos, todo));
-  }, [setTodos, todos]);
+    dispatch(todosActionCreator.deleteTodo(todo));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(todosActionCreator.fetchTodos());
+  }, [dispatch]);
 
   return (
     <>
@@ -79,10 +88,6 @@ const Todos = ({ todos: fetchedTodos }) => {
       )}
     </>
   );
-};
-
-Todos.propTypes = {
-  todos: PropTypes.arrayOf(todoType.isRequired).isRequired,
 };
 
 export default Todos;

@@ -1,17 +1,26 @@
-import PropTypes from 'prop-types';
-import { useRouter } from 'hooks/hooks';
-import { getTodoById } from 'helpers/helpers';
-import { DataPlaceholder } from 'common/enums/enums';
-import { todoType } from 'common/prop-types/prop-types';
-import { Placeholder } from 'components/common/common';
+import { useRouter, useSelector, useDispatch, useEffect } from 'hooks/hooks';
+import { todo as todoActionCreator } from 'store/actions';
+import { DataStatus, DataPlaceholder } from 'common/enums/enums';
+import { Placeholder, Loader } from 'components/common/common';
 import './styles.css';
 
-const TodoPreview = ({ todos }) => {
+const TodoPreview = () => {
+  const { todo, status } = useSelector(({ todo }) => ({
+    todo: todo.todo,
+    status: todo.status,
+  }));
   const { query } = useRouter();
 
-  const todo = getTodoById(todos, query.id);
-
+  const dispatch = useDispatch();
   const hasPage = Boolean(todo);
+
+  useEffect(() => {
+    dispatch(todoActionCreator.fetchTodo(query.id));
+  }, [dispatch, query.id]);
+
+  if (status !== DataStatus.SUCCESS) {
+    return <Loader />;
+  }
 
   if (!hasPage) {
     return <Placeholder text={DataPlaceholder.NO_TODO} />;
@@ -36,10 +45,6 @@ const TodoPreview = ({ todos }) => {
       </dl>
     </section>
   );
-};
-
-TodoPreview.propTypes = {
-  todos: PropTypes.arrayOf(todoType.isRequired).isRequired,
 };
 
 export default TodoPreview;
