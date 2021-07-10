@@ -1,5 +1,11 @@
 import { AppPath } from 'common/enums/enums';
-import { Header, Footer, Switch, Route } from 'components/common/common';
+import {
+  Header,
+  Footer,
+  Switch,
+  Route,
+  Toastr,
+} from 'components/common/common';
 import Todos from 'components/todos/todos';
 import TodoPreview from 'components/todo-preview/todo-preview';
 import NotFound from 'components/not-found/not-found';
@@ -15,6 +21,7 @@ const App = () => (
       </Switch>
     </main>
     <Footer />
+    <Toastr />
   </>
 );
 
