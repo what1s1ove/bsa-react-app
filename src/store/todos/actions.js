@@ -1,11 +1,19 @@
 import { getRandomId } from 'helpers/helpers';
-import { TodoKey, ENV, ApiPath } from 'common/enums/enums';
+import { TodoKey, DataStatus } from 'common/enums/enums';
 import { ActionType } from './common';
 
-const fetchTodos = () => ({
-  type: ActionType.FETCH_TODOS,
-  payload: {},
-  callApi: `${ENV.API.URL}${ApiPath.TODOS}`,
+const setStatus = (status) => ({
+  type: ActionType.SET_STATUS,
+  payload: {
+    status,
+  },
+});
+
+const setTodos = (todos) => ({
+  type: ActionType.SET_TODOS,
+  payload: {
+    todos,
+  },
 });
 
 const addTodo = (todo) => ({
@@ -39,5 +47,19 @@ const changeStatus = ({ id, status }) => ({
     status,
   },
 });
+
+const fetchTodos = () => async (dispatch, _getStore, { todosService }) => {
+    dispatch(setStatus(DataStatus.PENDING));
+
+    try {
+      const todos = await todosService.getAll();
+
+      dispatch(setTodos(todos));
+
+      dispatch(setStatus(DataStatus.SUCCESS));
+    } catch {
+      dispatch(setStatus(DataStatus.ERROR));
+    }
+  };
 
 export { fetchTodos, addTodo, updateTodo, changeStatus, deleteTodo };

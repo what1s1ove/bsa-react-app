@@ -1,4 +1,5 @@
 const ActionType = {
+  SET_STATUS: 'todos/set-status',
   SET_TODOS: 'todos/set-todos',
   FETCH_TODOS: 'todos/fetch-todos',
   ADD: 'todos/add',

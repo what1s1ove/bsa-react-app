@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { callApi as callApiMiddleware } from 'store/middlewares/middlewares';
+import { todos as todosService } from 'services/services';
+import { thunk as thunkMiddleware } from 'store/middlewares/middlewares';
 import { todos, todo } from './root-reducer';
 
 const store = createStore(
@@ -8,7 +9,13 @@ const store = createStore(
     todos,
     todo,
   }),
-  composeWithDevTools(applyMiddleware(callApiMiddleware)),
+  composeWithDevTools(
+    applyMiddleware(
+      thunkMiddleware.withExtraArgument({
+        todosService,
+      }),
+    ),
+  ),
 );
 
 export { store };

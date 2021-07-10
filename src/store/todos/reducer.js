@@ -1,4 +1,4 @@
-import { DataLoadStatus, DataStatus } from 'common/enums/enums';
+import { DataStatus } from 'common/enums/enums';
 import { ActionType } from './common';
 
 const initialState = {
@@ -10,26 +10,19 @@ const reducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case ActionType.SET_STATUS: {
+      const { status } = payload;
+
+      return {
+        ...state,
+        status,
+      };
+    }
     case ActionType.SET_TODOS: {
       const { todos } = payload;
 
       return {
         ...state,
-        todos,
-      };
-    }
-    case `${ActionType.FETCH_TODOS}${DataLoadStatus.START}`: {
-      return {
-        ...state,
-        status: DataStatus.PENDING,
-      };
-    }
-    case `${ActionType.FETCH_TODOS}${DataLoadStatus.SUCCESS}`: {
-      const { response: todos } = payload;
-
-      return {
-        ...state,
-        status: DataStatus.SUCCESS,
         todos,
       };
     }

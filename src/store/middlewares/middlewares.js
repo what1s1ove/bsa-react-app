@@ -1,1 +1,1 @@
-export { callApi } from './call-api/call-api.middleware';
+export { default as thunk } from 'redux-thunk';
