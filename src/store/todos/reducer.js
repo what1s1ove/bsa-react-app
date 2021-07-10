@@ -1,10 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DataStatus, ActionStatus } from 'common/enums/enums';
-import { fetchTodos, addTodo, updateTodo, deleteTodo } from './actions';
+import { fetchTodos, addTodo, updateTodo, deleteTodo, updateTodoHard } from './actions';
 
 const initialState = {
   todos: [],
   status: DataStatus.IDLE,
+  isSaving: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -29,6 +30,20 @@ const reducer = createReducer(initialState, (builder) => {
       return it.id === todo.id ? { ...it, ...todo } : it;
     });
   });
+  builder.addCase(updateTodoHard, (state) => {
+    state.isSaving = true;
+  })
+  builder.addCase(`${updateTodoHard.type}/${ActionStatus.FULFILLED}`, (state, { payload }) => {
+    const { todo } = payload;
+
+    state.todos = state.todos.map((it) => {
+      return it.id === todo.id ? { ...it, ...todo } : it;
+    });
+    state.isSaving = false;
+  })
+  builder.addCase(`${updateTodoHard.type}/${ActionStatus.REJECTED}`, (state) => {
+    Object.assign(state, initialState);
+  })
   builder.addCase(deleteTodo.fulfilled, (state, { payload }) => {
     const { todo } = payload;
 

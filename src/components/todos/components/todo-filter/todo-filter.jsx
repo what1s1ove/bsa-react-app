@@ -6,7 +6,7 @@ import './style.css';
 const statusOptions = [DEFAULT_FILTER_VALUE].concat(Object.values(TodoStatus));
 const priorityOptions = [DEFAULT_FILTER_VALUE].concat(Object.values(TodoPriority));
 
-const TodoFilter = ({ values, onChange, onPopupOpen }) => {
+const TodoFilter = ({ values, isDisabled, onChange, onPopupOpen }) => {
   const handleChange = ({ target }) => {
     const { name, value } = target;
 
@@ -23,6 +23,7 @@ const TodoFilter = ({ values, onChange, onPopupOpen }) => {
         <input
           value={values.search}
           name={FilterKey.SEARCH}
+          disabled={isDisabled}
           onChange={handleChange}
           type="search"
           placeholder="search by title"
@@ -33,6 +34,7 @@ const TodoFilter = ({ values, onChange, onPopupOpen }) => {
         <select
           value={values.status}
           name={FilterKey.STATUS}
+          disabled={isDisabled}
           onChange={handleChange}
         >
           {statusOptions.map((it) => (
@@ -47,6 +49,7 @@ const TodoFilter = ({ values, onChange, onPopupOpen }) => {
         <select
           value={values.priority}
           name={FilterKey.PRIORITY}
+          disabled={isDisabled}
           onChange={handleChange}
         >
           {priorityOptions.map((it) => (
@@ -56,7 +59,12 @@ const TodoFilter = ({ values, onChange, onPopupOpen }) => {
           ))}
         </select>
       </label>
-      <button onClick={onPopupOpen} className="filter__create" type="button">
+      <button
+        onClick={onPopupOpen}
+        disabled={isDisabled}
+        className="filter__create"
+        type="button"
+      >
         Created
       </button>
     </form>
@@ -69,6 +77,7 @@ TodoFilter.propTypes = {
     [FilterKey.STATUS]: PropTypes.oneOf(statusOptions).isRequired,
     [FilterKey.PRIORITY]: PropTypes.oneOf(priorityOptions).isRequired,
   }).isRequired,
+  isDisabled: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onPopupOpen: PropTypes.func.isRequired,
 };

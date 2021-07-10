@@ -1,5 +1,11 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { ActionType } from './common';
+
+const updateTodoHard = createAction(ActionType.HARD_UPDATE, (todo) => ({
+  payload: {
+    todo
+  }
+}));
 
 const fetchTodos = createAsyncThunk(ActionType.FETCH_TODOS, async (_args, { extra }) => ({
   todos: await extra.todosService.getAll(),
@@ -27,4 +33,11 @@ const changeStatus = createAsyncThunk(ActionType.UPDATE, async ({ id, status }, 
   }),
 }));
 
-export { fetchTodos, addTodo, updateTodo, changeStatus, deleteTodo };
+export {
+  fetchTodos,
+  addTodo,
+  updateTodoHard,
+  updateTodo,
+  changeStatus,
+  deleteTodo,
+};
