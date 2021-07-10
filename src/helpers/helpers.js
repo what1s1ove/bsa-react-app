@@ -1,1 +1,1 @@
-export { getRandomId, getValidClasses } from './string/string';
+export { getValidClasses } from './string/string';

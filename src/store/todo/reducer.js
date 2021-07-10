@@ -10,6 +10,14 @@ const reducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case ActionType.SET_STATUS: {
+      const { status } = payload;
+
+      return {
+        ...state,
+        status,
+      };
+    }
     case ActionType.SET_TODO: {
       const { todo } = payload;
 
@@ -19,7 +27,6 @@ const reducer = (state = initialState, action) => {
         todo,
       };
     }
-
     default: {
       return state;
     }
