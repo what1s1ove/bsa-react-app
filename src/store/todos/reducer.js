@@ -1,4 +1,5 @@
-import { DataStatus } from 'common/enums/enums';
+import { createReducer } from '@reduxjs/toolkit';
+import { DataStatus, ActionStatus } from 'common/enums/enums';
 import { fetchTodos, addTodo, updateTodo, deleteTodo } from './actions';
 
 const initialState = {
@@ -6,61 +7,36 @@ const initialState = {
   status: DataStatus.IDLE,
 };
 
-const reducer = (state = initialState, action) => {
-  const { type, payload } = action;
+const reducer = createReducer(initialState, (builder) => {
+  builder.addCase(fetchTodos.pending, (state) => {
+    state.status = DataStatus.PENDING;
+  });
+  builder.addCase(fetchTodos.fulfilled, (state, { payload }) => {
+    const { todos } = payload;
 
-  switch (type) {
-    case fetchTodos.pending.type: {
-      return {
-        ...state,
-        status: DataStatus.PENDING,
-      };
-    }
-    case fetchTodos.fulfilled.type: {
-      const { todos } = payload;
+    state.todos = todos;
+    state.status = DataStatus.SUCCESS;
+  });
+  builder.addCase(addTodo.fulfilled, (state, { payload }) => {
+    const { todo } = payload;
 
-      return {
-        ...state,
-        status: DataStatus.SUCCESS,
-        todos,
-      };
-    }
-    case fetchTodos.rejected.type: {
-      return {
-        ...state,
-        status: DataStatus.ERROR,
-      };
-    }
-    case addTodo.fulfilled.type: {
-      const { todo } = payload;
+    state.todos = state.todos.concat(todo);
+  });
+  builder.addCase(updateTodo.fulfilled, (state, { payload }) => {
+    const { todo } = payload;
 
-      return {
-        ...state,
-        todos: state.todos.concat(todo),
-      };
-    }
-    case updateTodo.fulfilled.type: {
-      const { todo } = payload;
+    state.todos = state.todos.map((it) => {
+      return it.id === todo.id ? { ...it, ...todo } : it;
+    });
+  });
+  builder.addCase(deleteTodo.fulfilled, (state, { payload }) => {
+    const { todo } = payload;
 
-      return {
-        ...state,
-        todos: state.todos.map((it) => {
-          return it.id === todo.id ? { ...todo, ...todo } : it;
-        }),
-      };
-    }
-    case deleteTodo.fulfilled.type: {
-      const { todo } = payload;
-
-      return {
-        ...state,
-        todos: state.todos.filter((it) => it.id !== todo.id),
-      };
-    }
-    default: {
-      return state;
-    }
-  }
-};
+    state.todos = state.todos.filter((it) => it.id !== todo.id);
+  });
+  builder.addMatcher((action) => action.type.endsWith(ActionStatus.REJECTED), (state) => {
+    state.status = DataStatus.ERROR;
+  });
+});
 
 export { reducer };

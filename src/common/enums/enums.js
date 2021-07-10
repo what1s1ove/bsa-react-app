@@ -1,5 +1,5 @@
 export { ApiPath } from './api/api';
-export { AppPath, DataPlaceholder, DataStatus, ENV } from './app/app';
+export { ActionStatus, AppPath, DataPlaceholder, DataStatus, ENV } from './app/app';
 export { KeydownKey } from './event/event';
 export { ContentType } from './file/file';
 export { FilterKey } from './filter/filter';

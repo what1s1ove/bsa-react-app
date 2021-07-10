@@ -1,3 +1,4 @@
+import { createReducer } from '@reduxjs/toolkit';
 import { DataStatus } from 'common/enums/enums';
 import { fetchTodo } from './actions';
 
@@ -6,29 +7,16 @@ const initialState = {
   status: DataStatus.IDLE,
 };
 
-const reducer = (state = initialState, action) => {
-  const { type, payload } = action;
+const reducer = createReducer(initialState, (builder) => {
+  builder.addCase(fetchTodo.pending, (state) => {
+    state.status = DataStatus.PENDING;
+  });
+  builder.addCase(fetchTodo.fulfilled, (state, { payload }) => {
+    const { todo } = payload;
 
-  switch (type) {
-    case fetchTodo.pending.type: {
-      return {
-        ...state,
-        status: DataStatus.PENDING,
-      };
-    }
-    case fetchTodo.fulfilled.type: {
-      const { todo } = payload;
-
-      return {
-        ...state,
-        status: DataStatus.SUCCESS,
-        todo,
-      };
-    }
-    default: {
-      return state;
-    }
-  }
-};
+    state.todo = todo;
+    state.status = DataStatus.SUCCESS;
+  });
+});
 
 export { reducer };
