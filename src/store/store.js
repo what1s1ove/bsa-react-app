@@ -1,21 +1,21 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
 import { todos as todosService } from 'services/services';
-import { thunk as thunkMiddleware } from 'store/middlewares/middlewares';
 import { todos, todo } from './root-reducer';
 
-const store = createStore(
-  combineReducers({
+const store = configureStore({
+  reducer: {
     todos,
     todo,
-  }),
-  composeWithDevTools(
-    applyMiddleware(
-      thunkMiddleware.withExtraArgument({
-        todosService,
-      }),
-    ),
-  ),
-);
+  },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware({
+      thunk: {
+        extraArgument: {
+          todosService,
+        },
+      },
+    });
+  },
+});
 
 export { store };
