@@ -1,93 +1,30 @@
-import { DataStatus } from 'common/enums/enums';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ActionType } from './common';
 
-const setStatus = (status) => ({
-  type: ActionType.SET_STATUS,
-  payload: {
-    status,
-  },
+const fetchTodos = createAsyncThunk(ActionType.FETCH_TODOS, async (_args, { extra }) => ({
+  todos: await extra.todosService.getAll(),
+}));
+
+const addTodo = createAsyncThunk(ActionType.ADD, async (payload, { extra }) => ({
+  todo: await extra.todosService.create(payload),
+}))
+
+const updateTodo = createAsyncThunk(ActionType.UPDATE, async (payload, { extra }) => ({
+  todo: await extra.todosService.update(payload),
+}));
+
+const deleteTodo = createAsyncThunk(ActionType.DELETE, async (todo, { extra }) => {
+  await extra.todosService.delete(todo.id);
+
+  return {
+    todo,
+  };
 });
 
-const fetchTodos = () => async (dispatch, _getStore, { todosService }) => {
-  dispatch(setStatus(DataStatus.PENDING));
-
-  try {
-    const todos = await todosService.getAll();
-
-    dispatch({
-      type: ActionType.SET_TODOS,
-      payload: {
-        todos,
-      },
-    });
-
-    dispatch(setStatus(DataStatus.SUCCESS));
-  } catch {
-    dispatch(setStatus(DataStatus.ERROR));
-  }
-};
-
-
-const addTodo = (payload) => async (dispatch, _getStore, { todosService }) => {
-  try {
-    const todo = await todosService.create(payload);
-
-    dispatch({
-      type: ActionType.ADD,
-      payload: {
-        todo,
-      },
-    });
-  } catch {
-    dispatch(setStatus(DataStatus.ERROR));
-  }
-};
-
-const updateTodo = (payload) => async (dispatch, _getStore, { todosService }) => {
-  try {
-    const todo = await todosService.update(payload);
-
-    dispatch({
-      type: ActionType.UPDATE,
-      payload: {
-        todo,
-      },
-    });
-  } catch {
-    dispatch(setStatus(DataStatus.ERROR));
-  }
-};
-
-const deleteTodo = (todo) => async (dispatch, _getStore, { todosService }) => {
-  try {
-    await todosService.delete(todo.id);
-
-    dispatch({
-      type: ActionType.DELETE,
-      payload: {
-        todo,
-      },
-    });
-  } catch {
-    dispatch(setStatus(DataStatus.ERROR));
-  }
-};
-
-const changeStatus = ({ id, status }) => async (dispatch, _getStore, { todosService }) => {
-  try {
-    const todo = await todosService.partialUpdate(id, {
-      status
-    });
-
-    dispatch({
-      type: ActionType.UPDATE,
-      payload: {
-        todo,
-      },
-    });
-  } catch {
-    dispatch(setStatus(DataStatus.ERROR));
-  }
-};
+const changeStatus = createAsyncThunk(ActionType.UPDATE, async ({ id, status }, { extra }) => ({
+  todo: await extra.todosService.partialUpdate(id, {
+    status,
+  }),
+}));
 
 export { fetchTodos, addTodo, updateTodo, changeStatus, deleteTodo };

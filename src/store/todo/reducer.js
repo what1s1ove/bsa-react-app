@@ -1,5 +1,5 @@
 import { DataStatus } from 'common/enums/enums';
-import { ActionType } from './common';
+import { fetchTodo } from './actions';
 
 const initialState = {
   todo: null,
@@ -10,15 +10,13 @@ const reducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case ActionType.SET_STATUS: {
-      const { status } = payload;
-
+    case fetchTodo.pending.type: {
       return {
         ...state,
-        status,
+        status: DataStatus.PENDING,
       };
     }
-    case ActionType.SET_TODO: {
+    case fetchTodo.fulfilled.type: {
       const { todo } = payload;
 
       return {

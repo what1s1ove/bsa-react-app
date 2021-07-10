@@ -1,5 +1,5 @@
 import { DataStatus } from 'common/enums/enums';
-import { ActionType } from './common';
+import { fetchTodos, addTodo, updateTodo, deleteTodo } from './actions';
 
 const initialState = {
   todos: [],
@@ -10,23 +10,28 @@ const reducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case ActionType.SET_STATUS: {
-      const { status } = payload;
-
+    case fetchTodos.pending.type: {
       return {
         ...state,
-        status,
+        status: DataStatus.PENDING,
       };
     }
-    case ActionType.SET_TODOS: {
+    case fetchTodos.fulfilled.type: {
       const { todos } = payload;
 
       return {
         ...state,
+        status: DataStatus.SUCCESS,
         todos,
       };
     }
-    case ActionType.ADD: {
+    case fetchTodos.rejected.type: {
+      return {
+        ...state,
+        status: DataStatus.ERROR,
+      };
+    }
+    case addTodo.fulfilled.type: {
       const { todo } = payload;
 
       return {
@@ -34,7 +39,7 @@ const reducer = (state = initialState, action) => {
         todos: state.todos.concat(todo),
       };
     }
-    case ActionType.UPDATE: {
+    case updateTodo.fulfilled.type: {
       const { todo } = payload;
 
       return {
@@ -44,7 +49,7 @@ const reducer = (state = initialState, action) => {
         }),
       };
     }
-    case ActionType.DELETE: {
+    case deleteTodo.fulfilled.type: {
       const { todo } = payload;
 
       return {
