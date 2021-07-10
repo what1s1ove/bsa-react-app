@@ -6,16 +6,17 @@ import {
   useDispatch,
 } from 'hooks/hooks';
 import { todos as todosActionCreator } from 'store/actions';
-import { DataPlaceholder } from 'common/enums/enums';
-import { Placeholder } from 'components/common/common';
+import { DataPlaceholder, DataStatus } from 'common/enums/enums';
+import { Placeholder, Loader } from 'components/common/common';
 import { TodoFilter, TodoList, TodoPopup } from './components/components';
 import { getFilteredTodos } from './helpers/helpers';
 import { DEFAULT_FILTER_VALUES, EMPTY_TODO } from './common/constants';
 import './styles.css';
 
 const Todos = () => {
-  const { todos } = useSelector(({ todos }) => ({
+  const { todos, status } = useSelector(({ todos }) => ({
     todos: todos.todos,
+    status: todos.status,
   }));
   const [currentTodo, setCurrentTodo] = useState(null);
   const [filterValues, setFilterValues] = useState(DEFAULT_FILTER_VALUES);
@@ -55,6 +56,10 @@ const Todos = () => {
   useEffect(() => {
     dispatch(todosActionCreator.fetchTodos());
   }, [dispatch]);
+
+  if (status === DataStatus.PENDING) {
+    return <Loader />;
+  }
 
   return (
     <>

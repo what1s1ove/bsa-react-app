@@ -1,13 +1,11 @@
 import { getRandomId } from 'helpers/helpers';
-import { TodoKey } from 'common/enums/enums';
-import { todos } from 'database.json';
+import { TodoKey, ENV, ApiPath } from 'common/enums/enums';
 import { ActionType } from './common';
 
 const fetchTodos = () => ({
-  type: ActionType.SET_TODOS,
-  payload: {
-    todos,
-  },
+  type: ActionType.FETCH_TODOS,
+  payload: {},
+  callApi: `${ENV.API.URL}${ApiPath.TODOS}`,
 });
 
 const addTodo = (todo) => ({
