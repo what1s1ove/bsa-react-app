@@ -6,7 +6,9 @@
     "npm": "6.x.x"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start:client": "react-scripts start",
+    "start:server": "json-server src/database.json --port 3001",
+    "start": "concurrently -k -p \"{name}\" -n \"CLIENT,SERVER\" -c \"green,blue\" \"npm:start:client\" \"npm:start:server\"",
     "build": "react-scripts build"
   },
   "dependencies": {
@@ -19,7 +21,10 @@
     "redux": "4.1.0",
     "redux-devtools-extension": "2.13.9"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "concurrently": "6.2.0",
+    "json-server": "0.16.3"
+  },
   "eslintConfig": {
     "extends": [
       "react-app"
